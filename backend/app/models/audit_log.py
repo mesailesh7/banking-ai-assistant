@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import DateTime, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
@@ -10,7 +10,11 @@ class AuditLog(Base):
     __tablename__ = 'audit_logs'
 
     id: Mapped[int] = mapped_column(
-        ForeignKey("users.id")
+        primary_key=True
+    )
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey('users.id'),
     )
 
     action: Mapped[str] = mapped_column(
@@ -36,6 +40,6 @@ class AuditLog(Base):
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
-        default=datetime.utcnow,
+        default=lambda: datetime.now(timezone.utc),
         index=True
     )

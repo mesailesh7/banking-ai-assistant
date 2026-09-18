@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
@@ -14,7 +14,7 @@ class Conversation(Base):
     )
 
     user_id: Mapped[int] = mapped_column(
-        foreign_key='users.id',
+        ForeignKey("users.id"),
     )
 
     title: Mapped[str] = mapped_column(
@@ -23,5 +23,5 @@ class Conversation(Base):
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
-        default=datetime.datetime.now(datetime.UTC)
+        default=lambda: datetime.now(timezone.utc),
     )

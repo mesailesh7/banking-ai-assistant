@@ -1,0 +1,3 @@
+to poplulate the database
+
+uv run python -m scripts.create_tables
