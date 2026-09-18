@@ -1,3 +1,12 @@
+
+
+
+
+uvicorn main:app --reload
 to poplulate the database
 
 uv run python -m scripts.create_tables
+
+
+create jwt secret key:
+python -c "import secrets; print(secrets.token_urlsafe(64))"
