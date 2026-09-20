@@ -32,3 +32,10 @@ def create_access_token(
         "email": email,
         "exp": expire,
     }
+
+    return jwt.encode(
+        payload,
+        settings.JWT_SECRET,
+        algorithm=settings.JWT_ALGORITHM,
+
+    )
